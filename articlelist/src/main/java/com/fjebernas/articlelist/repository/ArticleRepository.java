@@ -11,7 +11,7 @@ import java.util.List;
 @CrossOrigin
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-//  @RestResource(path = "findByDescriptionContaining", rel = "customFindMethod")
-//  List<Article> findByDescriptionContaining(@Param("infix") String infix);
+  @RestResource(path = "findByKeywordsContaining", rel = "customFindMethod")
+  List<Article> findByKeywordsContaining(@Param("infix") String infix);
 
 }
