@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import NavLinks from "../NavLinks/NavLinks";
@@ -7,39 +6,11 @@ import SearchBar from "./SearchBar";
 
 function FilterableList(props) {
 
-  const pageSize = 8;
-
-  const [articles, setArticles] = useState([]);
-  const [links, setLinks] = useState([]);
-
   useEffect(() => {
-    const fetchAllArticles = async () => {
-      await axios.get(`http://localhost:8080/api/articlelist/articles?size=${pageSize}`)
-        .then(res => {
-          setArticles(res.data._embedded.articles);
-          setLinks(res.data._links);
-        })
-        .catch(err => console.error(err));
-    }
-    fetchAllArticles();
+    props.fetchAllArticles(`http://localhost:8080/api/articlelist/articles?size=8`);
   }, []);
 
-  const onNavigate = (navUri) => {
-    const fetchAllArticles = async () => {
-      await axios.get(navUri)
-        .then(res => {
-          setArticles(res.data._embedded.articles);
-          setLinks(res.data._links);
-        })
-        .catch(err => console.error(err));
-    }
-    fetchAllArticles();
-  }
-
-  const handleFilterTextChange = (text) => {
-  }
-
-  const articleCards = articles.map(article => (
+  const articleCards = props.articles.map(article => (
     <ArticleCard key={article._links.self.href} article={article} />
   ));
 
@@ -48,17 +19,17 @@ function FilterableList(props) {
     <Container className="my-5">
       <Row className="justify-content-md-center">
         <Col md='6'>
-          <SearchBar onChange={handleFilterTextChange} />
+          <SearchBar onChange={() => {}} />
         </Col>
       </Row>
-      <Row>
-        <div className="d-flex justify-content-center flex-wrap my-4" style={{rowGap: '1rem', columnGap: '1rem'}}>
+      <Row className="justify-content-md-center">
+        <div className="d-flex flex-wrap my-5" style={{width: '74rem', rowGap: '1rem', columnGap: '1rem'}}>
           {articleCards}
         </div>
       </Row>
       <Row className="justify-content-md-center">
         <Col md='6'>
-          <NavLinks links={links} onNavigate={onNavigate} />
+          <NavLinks links={props.links} onNavigate={(navUri) => props.fetchAllArticles(navUri)} />
         </Col>
       </Row>
     </Container>

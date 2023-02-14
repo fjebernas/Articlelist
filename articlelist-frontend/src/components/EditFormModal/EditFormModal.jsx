@@ -4,9 +4,9 @@ import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function CreateFormModal(props) {
+function EditFormModal(props) {
 
-  const [newArticle, setNewArticle] = useState({
+  const [updatedArticle, setupdatedArticle] = useState({
     description: "",
     category: "",
     keywords: "",
@@ -16,29 +16,27 @@ function CreateFormModal(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:8080/api/articlelist/articles', newArticle)
+    axios.put(props.article._links.self.href, updatedArticle)
       .then(res => {
         console.log(res);
-        props.fetchAllArticles(`http://localhost:8080/api/articlelist/articles?size=8`);
-        props.onHide();
       })
       .catch(err => console.error(err));
   }
 
   const handleDescriptionChange = (e) => {
-    setNewArticle({...newArticle, description: e.target.value});
+    setupdatedArticle({...updatedArticle, description: e.target.value});
   }
 
   const handleCategoryChange = (e) => {
-    setNewArticle({...newArticle, category: e.target.value});
+    setupdatedArticle({...updatedArticle, category: e.target.value});
   }
 
   const handleKeywordsChange = (e) => {
-    setNewArticle({...newArticle, keywords: e.target.value});
+    setupdatedArticle({...updatedArticle, keywords: e.target.value});
   }
 
   const handleLinkChange = (e) => {
-    setNewArticle({...newArticle, link: e.target.value});
+    setupdatedArticle({...updatedArticle, link: e.target.value});
   }
 
   return (
@@ -50,7 +48,7 @@ function CreateFormModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Add Article
+          Edit Article
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -60,7 +58,7 @@ function CreateFormModal(props) {
             <Form.Control
               onChange={handleDescriptionChange}
               type='text'
-              placeholder='e.g. What makes an API powerful.'
+              placeholder={props.article.description}
             />
           </Form.Group>
 
@@ -69,7 +67,7 @@ function CreateFormModal(props) {
             <Form.Control
               onChange={handleCategoryChange}
               type='text'
-              placeholder='e.g. Back-end'
+              placeholder={props.article.category}
             />
           </Form.Group>
 
@@ -78,7 +76,7 @@ function CreateFormModal(props) {
             <Form.Control
               onChange={handleKeywordsChange}
               type='text'
-              placeholder='e.g. Spring Java API'
+              placeholder={props.article.keywords}
             />
           </Form.Group>
 
@@ -87,12 +85,12 @@ function CreateFormModal(props) {
             <Form.Control
               onChange={handleLinkChange}
               type='text'
-              placeholder='e.g. example.com'
+              placeholder={props.article.link}
             />
           </Form.Group>
 
           <Button variant='success' type='submit'>
-            Submit
+            Update
           </Button>
         </Form>
       </Modal.Body>
@@ -103,4 +101,4 @@ function CreateFormModal(props) {
   );
 }
 
-export default CreateFormModal;
+export default EditFormModal;

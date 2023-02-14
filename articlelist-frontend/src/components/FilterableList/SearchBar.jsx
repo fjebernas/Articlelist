@@ -7,16 +7,17 @@ function SearchBar(props) {
   }
 
   return (
-    <div className="input-group">
-      <div className="form-outline w-100">
+    <div className="form-outline w-100">
+      <div className="input-group">
         <input
           type="search"
           id="search" 
-          className="form-control rounded-0 rounded-start"
-          placeholder="Type to filter articles ..."
+          className="form-control form-control-lg rounded-0 rounded-start"
+          placeholder="Filter articles by keywords ..."
           onChange={handleChange}
           autoComplete='off'
         />
+        <button className="btn btn-primary">Search</button>
       </div>
     </div>
   );

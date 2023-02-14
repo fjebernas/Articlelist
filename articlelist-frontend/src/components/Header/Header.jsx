@@ -5,8 +5,8 @@ function Header(props) {
     <Navbar bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="#home" className="fs-2">
-          <span className="text-primary">Article</span>
-          <span className="text-warning">list</span>
+          <span className="text-white">Article</span>
+          <span className="text-info">list</span>
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
