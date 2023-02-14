@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, Card, Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import NavLinks from "../NavLinks/NavLinks";
+import ArticleCard from "./ArticleCard";
+import SearchBar from "./SearchBar";
 
 function FilterableList(props) {
 
@@ -11,7 +13,6 @@ function FilterableList(props) {
   const [links, setLinks] = useState([]);
 
   useEffect(() => {
-
     const fetchAllArticles = async () => {
       await axios.get(`http://localhost:8080/api/articlelist/articles?size=${pageSize}`)
         .then(res => {
@@ -35,26 +36,32 @@ function FilterableList(props) {
     fetchAllArticles();
   }
 
+  const handleFilterTextChange = (text) => {
+  }
+
   const articleCards = articles.map(article => (
-    <Card bg="light" style={{width: '17rem', height: '14rem'}}>
-      <Card.Header>{article.category}</Card.Header>
-      <Card.Body>
-        <Card.Title>{article.description}</Card.Title>
-      </Card.Body>
-      <Card.Footer>
-        <Button variant="outline-success" size="sm">Edit</Button>
-      </Card.Footer>
-    </Card>
+    <ArticleCard key={article._links.self.href} article={article} />
   ));
 
 
   return (
-    <>
-      <Container className="d-flex justify-content-center flex-wrap mt-5 mb-4" style={{rowGap: '1rem', columnGap: '1rem'}}>
-        {articleCards}
-      </Container>
-      <NavLinks links={links} onNavigate={onNavigate} />
-    </>
+    <Container className="my-5">
+      <Row className="justify-content-md-center">
+        <Col md='6'>
+          <SearchBar onChange={handleFilterTextChange} />
+        </Col>
+      </Row>
+      <Row>
+        <div className="d-flex justify-content-center flex-wrap my-4" style={{rowGap: '1rem', columnGap: '1rem'}}>
+          {articleCards}
+        </div>
+      </Row>
+      <Row className="justify-content-md-center">
+        <Col md='6'>
+          <NavLinks links={links} onNavigate={onNavigate} />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

@@ -1,3 +1,5 @@
+import { Pagination } from "react-bootstrap";
+
 function NavLinks(props) {
 
   const handleNavFirst = (e) => {
@@ -23,21 +25,23 @@ function NavLinks(props) {
   const navLinks = [];
 
   if ("first" in props.links) {
-		navLinks.push(<button className="btn btn-warning btn-sm mx-1" key="first" onClick={handleNavFirst}>First</button>);
+		navLinks.push(<Pagination.First key="first" onClick={handleNavFirst} />);
 	}
 	if ("prev" in props.links) {
-		navLinks.push(<button className="btn btn-warning btn-sm mx-1" key="prev" onClick={handleNavPrev}>Prev</button>);
+		navLinks.push(<Pagination.Prev key="prev" onClick={handleNavPrev} />);
 	}
 	if ("next" in props.links) {
-		navLinks.push(<button className="btn btn-warning btn-sm mx-1" key="next" onClick={handleNavNext}>Next</button>);
+		navLinks.push(<Pagination.Next key="next" onClick={handleNavNext} />);
 	}
 	if ("last" in props.links) {
-		navLinks.push(<button className="btn btn-warning btn-sm mx-1" key="last" onClick={handleNavLast}>Last</button>);
+		navLinks.push(<Pagination.Last key="last" onClick={handleNavLast} />);
 	}
 
   return (
     <div>
-      {navLinks}
+      <Pagination className="d-flex justify-content-center">
+        {navLinks}
+      </Pagination>
     </div>
   );
 }
