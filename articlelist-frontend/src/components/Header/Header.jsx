@@ -9,10 +9,14 @@ function Header() {
   return (
     <nav className="navbar bg-dark">
       <div className="container">
-        <span className="navbar-brand fs-3">
+        <button 
+          className="navbar-brand fs-3 btn btn-link text-decoration-none"
+          type="button"
+          onClick={() => {navigate('/')}}
+        >
           <span className="text-white">Article</span>
           <span className="text-danger">list</span>
-        </span>
+        </button>
         <div className="d-flex">
           <button 
             className="btn btn-primary btn-lg me-3"

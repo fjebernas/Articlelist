@@ -10,7 +10,7 @@ function CreateForm() {
   const [article, setArticle] = useState({
     description: '',
     category: '',
-    category: '',
+    keywords: '',
     link: ''
   });
 
@@ -23,7 +23,7 @@ function CreateForm() {
   }
 
   const handleKeywordsChange = (value) => {
-    setArticle({...article, category: value});
+    setArticle({...article, keywords: value});
   }
 
   const handleLinkChange = (value) => {
@@ -51,18 +51,22 @@ function CreateForm() {
                 <InputText
                   name='description'
                   onChange={handleDescriptionChange}
+                  placeholder='e.g. Things that make an API powerful'
                 />
                 <InputText
                   name='category'
                   onChange={handleCategoryChange}
+                  placeholder='e.g. back-end'
                 />
                 <InputText
                   name='keywords'
                   onChange={handleKeywordsChange}
+                  placeholder='e.g. spring java api'
                 />
                 <InputText
                   name='link'
                   onChange={handleLinkChange}
+                  placeholder='e.g. https://example.com'
                 />
                 <button
                   type="submit"

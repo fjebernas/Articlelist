@@ -17,7 +17,7 @@ function InputText(props) {
         name={props.name}
         id={props.name}
         className="form-control bg-secondary text-success"
-        placeholder=''
+        placeholder={props.placeholder}
         onChange={handleChange}
         value={props.value}
         autoComplete='off'
