@@ -4,27 +4,27 @@ import Header from './components/Header/Header';
 import CreateFormModal from './components/CreateFormModal/CreateFormModal';
 import { useState } from 'react';
 import Footer from './components/Footer/Footer';
+import FilterableList from './components/FilterableList/FilterableList';
 
 function App() {
 
   const [isCreateFormModalShowing, setIsCreateFormModalShowing] = useState(false);
 
   return (
-    <div className="App bg-secondary min-vh-100 d-flex flex-column justify-content-between">
-      <Header onAddArticleButtonClick={() => setIsCreateFormModalShowing(true)} />
-
-
-
-
-
-      <Footer />
+    <>
+      <div className="App min-vh-100 d-flex flex-column justify-content-between">
+        <Header onAddArticleButtonClick={() => setIsCreateFormModalShowing(true)} />
+        <FilterableList />
+        <Footer />
+      </div>
 
       {/* modals */}
       <CreateFormModal 
         show={isCreateFormModalShowing} 
         onHide={() => setIsCreateFormModalShowing(false)} 
       />
-    </div>
+    </>
+    
   );
 }
 
