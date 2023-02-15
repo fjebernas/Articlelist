@@ -6,7 +6,7 @@ function ArticleCard(props) {
     <Card bg="light" style={{width: '17rem', height: '14rem'}}>
       <Card.Header className="text-secondary fw-bold">{props.article.category}</Card.Header>
       <Card.Body>
-        <Card.Title className="text-primary fs-4 text-start">{props.article.description}</Card.Title>
+        <Card.Title className="text-primary fs-4 text-start">{props.article.context}</Card.Title>
       </Card.Body>
       <Card.Footer
         as='a'

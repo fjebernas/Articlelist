@@ -12,11 +12,14 @@ function Header(props) {
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
             <Button 
-              variant="success" 
-              size="md" 
-              onClick={() => props.onAddArticleButtonClick()}
+              variant="info" 
+              size="md"
+              as="a"
+              href="https://francisbernas.netlify.app"
+              target="_blank"
+              rel="noreferrer"
             >
-              Add article
+              Project Portfolio
             </Button>
           </Navbar.Text>
         </Navbar.Collapse>

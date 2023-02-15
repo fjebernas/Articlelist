@@ -1,50 +1,34 @@
-import axios from 'axios';
-import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { baseUrl } from '../../data/application.properties';
 
 function CreateFormModal(props) {
 
-  const [newArticle, setNewArticle] = useState({
-    description: "",
-    category: "",
-    keywords: "",
-    link: ""
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    axios.post(`${baseUrl}/articles`, newArticle)
-      .then(res => {
-        console.log(res);
-        props.fetchArticles(`${baseUrl}/articles?size=8`);
-        props.onHide();
-      })
-      .catch(err => console.error(err));
+  const handleClose = () => {
+    props.onHide();
   }
 
-  const handleDescriptionChange = (e) => {
-    setNewArticle({...newArticle, description: e.target.value});
+  const handleContextChange = (e) => {
+    props.onContextChange(e.target.value);
   }
 
   const handleCategoryChange = (e) => {
-    setNewArticle({...newArticle, category: e.target.value});
-  }
-
-  const handleKeywordsChange = (e) => {
-    setNewArticle({...newArticle, keywords: e.target.value});
+    props.onCategoryChange(e.target.value);
   }
 
   const handleLinkChange = (e) => {
-    setNewArticle({...newArticle, link: e.target.value});
+    props.onLinkChange(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.onSubmit();
   }
 
   return (
     <Modal
-      {...props}
+      show={props.show}
+      onHide={handleClose}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -55,11 +39,11 @@ function CreateFormModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={handleSubmit}>
+        <Form>
           <Form.Group className='mb-3'>
-            <Form.Label>Description</Form.Label>
+            <Form.Label>context</Form.Label>
             <Form.Control
-              onChange={handleDescriptionChange}
+              onChange={handleContextChange}
               type='text'
               placeholder='e.g. What makes an API powerful.'
             />
@@ -75,15 +59,6 @@ function CreateFormModal(props) {
           </Form.Group>
 
           <Form.Group className='mb-3'>
-            <Form.Label>Keywords</Form.Label>
-            <Form.Control
-              onChange={handleKeywordsChange}
-              type='text'
-              placeholder='e.g. Spring Java API'
-            />
-          </Form.Group>
-
-          <Form.Group className='mb-3'>
             <Form.Label>Link</Form.Label>
             <Form.Control
               onChange={handleLinkChange}
@@ -92,13 +67,17 @@ function CreateFormModal(props) {
             />
           </Form.Group>
 
-          <Button variant='success' type='submit'>
+          <Button 
+            variant='success' 
+            type='button'
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={handleClose}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
