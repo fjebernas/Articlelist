@@ -1,5 +1,3 @@
-import { Container } from "react-bootstrap";
-
 function SearchBar(props) {
 
   const handleChange = (e) => {

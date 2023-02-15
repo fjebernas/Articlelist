@@ -1,6 +1,12 @@
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Card, Col, Container, Modal, Row } from "react-bootstrap";
 
 function ArticleCard(props) {
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleDelete = () => {
     props.onDelete(props.article._links.self.href);
@@ -29,7 +35,21 @@ function ArticleCard(props) {
               </Button>
             </Col>
             <Col xs={4} className='p-0'>
-              <Button variant="danger" size="sm" className="me-2 w-75" onClick={handleDelete}>Delete</Button>
+              <Button variant="danger" size="sm" className="me-2 w-75" onClick={handleShow}>Delete</Button>
+              <Modal show={show} onHide={handleClose} centered size="sm">
+                <Modal.Header closeButton>
+                  <Modal.Title>Warning</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Confirm delete?</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    No
+                  </Button>
+                  <Button variant="danger" onClick={handleDelete}>
+                    Yes
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </Col>
           </Row>
         </Container>

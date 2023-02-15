@@ -17,7 +17,7 @@ function FilterableListAndCreator(props) {
 
   useEffect(() => {
     fetchArticles(articlesFromTheStartUri);
-  }, []);
+  }, [articlesFromTheStartUri]);
 
   const fetchArticles = async (uri) => {
     await axios.get(uri)
