@@ -51,11 +51,11 @@ function CreateFormModal(props) {
 
           <Form.Group className='mb-3'>
             <Form.Label>Category</Form.Label>
-            <Form.Control
-              onChange={handleCategoryChange}
-              type='text'
-              placeholder='e.g. Back-end'
-            />
+            <Form.Select onChange={handleCategoryChange} type='text'>
+              <option value='Front-end'>Front-end</option>
+              <option value='Back-end'>Back-end</option>
+              <option value='Other'>Other</option>
+            </Form.Select>
           </Form.Group>
 
           <Form.Group className='mb-3'>

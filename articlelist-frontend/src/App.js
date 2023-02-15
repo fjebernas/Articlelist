@@ -7,14 +7,11 @@ import FilterableListAndCreator from './components/FilterableList/FilterableList
 
 function App() {
   return (
-    <>
-      <div className="App min-vh-100 d-flex flex-column justify-content-between">
-        <Header />
-        <FilterableListAndCreator />
-        <Footer />
-      </div>
-    </>
-    
+    <div className="App min-vh-100 d-flex flex-column justify-content-between">
+      <Header />
+      <FilterableListAndCreator />
+      <Footer />
+    </div>
   );
 }
 

@@ -5,10 +5,16 @@ function Footer() {
         <div className="row">
           <div className="col text-center">
             <h5 className="pt-2 pb-2 fs-6">
-              <span className='fw-light text-light'>
+              <span className='fw-light text-muted'>
                 Articlelist by
               </span>
-              <a href="https://github.com/fjebernas/Articlelist" className="text-decoration-none text-white" target="_blank" rel="noreferrer">&nbsp;Francis Bernas</a>
+              <a
+                href="https://github.com/fjebernas/Articlelist"
+                className="text-decoration-none text-primary"
+                target="_blank"
+                rel="noreferrer">
+                &nbsp;Francis Bernas
+              </a>
             </h5>
           </div>
         </div>
