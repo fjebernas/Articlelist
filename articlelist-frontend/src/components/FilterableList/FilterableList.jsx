@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import NavLinks from "../NavLinks/NavLinks";
 import ArticleCard from "./ArticleCard";
 import SearchBar from "./SearchBar";
 
 function FilterableList(props) {
-
-  useEffect(() => {
-    props.fetchAllArticles(`http://localhost:8080/api/articlelist/articles?size=8`);
-  }, []);
 
   const articleCards = props.articles.map(article => (
     <ArticleCard key={article._links.self.href} article={article} />
@@ -29,7 +24,7 @@ function FilterableList(props) {
       </Row>
       <Row className="justify-content-md-center">
         <Col md='6'>
-          <NavLinks links={props.links} onNavigate={(navUri) => props.fetchAllArticles(navUri)} />
+          <NavLinks links={props.links} onNavigate={(navUri) => props.fetchArticles(navUri)} />
         </Col>
       </Row>
     </Container>

@@ -3,10 +3,11 @@ import './App.css';
 import '../node_modules/bootswatch/dist/solar/bootstrap.css';
 import Header from './components/Header/Header';
 import CreateFormModal from './components/CreateFormModal/CreateFormModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Footer from './components/Footer/Footer';
 import FilterableList from './components/FilterableList/FilterableList';
 import axios from 'axios';
+import { baseUrl } from './data/application.properties';
 
 function App() {
 
@@ -15,7 +16,11 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [links, setLinks] = useState([]);
 
-  const fetchAllArticles = async (uri) => {
+  useEffect(() => {
+    fetchArticles(`${baseUrl}/articles?size=8`);
+  }, []);
+
+  const fetchArticles = async (uri) => {
     await axios.get(uri)
       .then(res => {
         setArticles(res.data._embedded.articles);
@@ -28,7 +33,7 @@ function App() {
     <>
       <div className="App min-vh-100 d-flex flex-column justify-content-between">
         <Header onAddArticleButtonClick={() => setIsCreateFormModalShowing(true)} />
-        <FilterableList articles={articles} links={links} fetchAllArticles={fetchAllArticles} />
+        <FilterableList articles={articles} links={links} fetchArticles={fetchArticles} />
         <Footer />
       </div>
 
@@ -36,7 +41,7 @@ function App() {
       <CreateFormModal 
         show={isCreateFormModalShowing} 
         onHide={() => setIsCreateFormModalShowing(false)}
-        fetchAllArticles={fetchAllArticles}
+        fetchArticles={fetchArticles}
       />
     </>
     

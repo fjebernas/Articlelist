@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { baseUrl } from '../../data/application.properties';
 
 function CreateFormModal(props) {
 
@@ -16,10 +17,10 @@ function CreateFormModal(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:8080/api/articlelist/articles', newArticle)
+    axios.post(`${baseUrl}/articles`, newArticle)
       .then(res => {
         console.log(res);
-        props.fetchAllArticles(`http://localhost:8080/api/articlelist/articles?size=8`);
+        props.fetchArticles(`${baseUrl}/articles?size=8`);
         props.onHide();
       })
       .catch(err => console.error(err));

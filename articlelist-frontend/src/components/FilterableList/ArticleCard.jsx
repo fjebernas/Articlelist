@@ -10,7 +10,9 @@ function ArticleCard(props) {
       </Card.Body>
       <Card.Footer
         as='a'
+        target='_blank'
         href={props.article.link}
+        rel='noreferrer'
         className="text-info fs-6"
       >
         Follow link
