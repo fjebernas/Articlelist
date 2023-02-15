@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Badge, Button, Card, Col, Container, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 
 function ArticleCard(props) {
 

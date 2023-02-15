@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from "../../data/application.properties";
+import { toastError, toastSuccess } from "../../utils/utilities";
 import CreateFormModal from "../CreateFormModal/CreateFormModal";
 import NavLinks from "../NavLinks/NavLinks";
 import ArticleCard from "./ArticleCard";
@@ -31,9 +34,13 @@ function FilterableListAndCreator(props) {
   const handleDelete = (uri) => {
     axios.delete(uri)
       .then(() => {
+        toastSuccess(`Article deleted!`);
         fetchArticles(articlesFromTheStartUri);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        toastError(`Can't delete article!`);
+        console.error(err)
+      });
   }
 
   const articleCards = articles.map(article => (
@@ -51,22 +58,42 @@ function FilterableListAndCreator(props) {
     category: "",
     link: ""
   });
-
+  
   const onCreateFormSubmit = () => {
     axios.post(`${baseUrl}/articles`, newArticle)
       .then(() => {
-        fetchArticles(articlesFromTheStartUri);
         setIsCreateFormModalShowing(false);
+        setNewArticle({context: "", category: "", link: ""});
+        toastSuccess(`Article created!`);
+        fetchArticles(articlesFromTheStartUri);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        toastError(`Can't create article!`);
+        console.error(err)
+      });
   }
 
   return (
     <>
-      {/* modals */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+
       <CreateFormModal 
         show={isCreateFormModalShowing}
-        onHide={() => setIsCreateFormModalShowing(false)}
+        onHide={() => {
+          setIsCreateFormModalShowing(false);
+          setNewArticle({context: "", category: "", link: ""});
+        }}
         onContextChange={value => {setNewArticle({...newArticle, context: value})}}
         onCategoryChange={value => {setNewArticle({...newArticle, category: value})}}
         onLinkChange={value => {setNewArticle({...newArticle, link: value})}}
