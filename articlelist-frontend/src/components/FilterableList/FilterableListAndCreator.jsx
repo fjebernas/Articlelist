@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { ToastContainer } from "react-toastify";
+import { Flip, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from "../../data/application.properties";
 import { toastError, toastSuccess } from "../../utils/utilities";
@@ -86,6 +86,7 @@ function FilterableListAndCreator(props) {
         draggable
         pauseOnHover
         theme="colored"
+        transition={Flip}
       />
 
       <CreateFormModal 
