@@ -10,12 +10,13 @@ import SearchBar from "./SearchBar";
 function FilterableListAndCreator(props) {
 
   const pageSize = 8;
+  const articlesFromTheStartUri = `${baseUrl}/articles?size=${pageSize}`;
 
   const [articles, setArticles] = useState([]);
   const [links, setLinks] = useState([]);
 
   useEffect(() => {
-    fetchArticles(`${baseUrl}/articles?size=${pageSize}`);
+    fetchArticles(articlesFromTheStartUri);
   }, []);
 
   const fetchArticles = async (uri) => {
@@ -27,8 +28,20 @@ function FilterableListAndCreator(props) {
       .catch(err => console.error(err));
   }
 
+  const handleDelete = (uri) => {
+    axios.delete(uri)
+      .then(() => {
+        fetchArticles(articlesFromTheStartUri);
+      })
+      .catch(err => console.error(err));
+  }
+
   const articleCards = articles.map(article => (
-    <ArticleCard key={article._links.self.href} article={article} />
+    <ArticleCard
+      key={article._links.self.href}
+      article={article}
+      onDelete={handleDelete}
+    />
   ));
 
   const [isCreateFormModalShowing, setIsCreateFormModalShowing] = useState(false);
@@ -41,8 +54,8 @@ function FilterableListAndCreator(props) {
 
   const onCreateFormSubmit = () => {
     axios.post(`${baseUrl}/articles`, newArticle)
-      .then(res => {
-        fetchArticles(`${baseUrl}/articles?size=${pageSize}`);
+      .then(() => {
+        fetchArticles(articlesFromTheStartUri);
         setIsCreateFormModalShowing(false);
       })
       .catch(err => console.error(err));
@@ -78,8 +91,11 @@ function FilterableListAndCreator(props) {
           </Col>
         </Row>
         <Row className="justify-content-md-center">
-          <div className="d-flex flex-wrap my-5" style={{width: '74rem', rowGap: '1rem', columnGap: '1rem'}}>
-            {articleCards}
+          <div className="d-flex justify-content-md-start justify-content-center flex-wrap my-5" style={{width: '74rem', rowGap: '1rem', columnGap: '1rem'}}>
+            {
+              articleCards.length > 0 ? articleCards 
+                                      : <p className="w-100 text-center text-muted fs-3 fst-italic">No articles</p>
+            }
           </div>
         </Row>
         <Row className="justify-content-md-center">
