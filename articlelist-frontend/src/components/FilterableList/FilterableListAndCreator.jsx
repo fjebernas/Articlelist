@@ -1,4 +1,5 @@
 import axios from "axios";
+import "boxicons";
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Flip, ToastContainer } from "react-toastify";
@@ -105,13 +106,15 @@ function FilterableListAndCreator(props) {
 
       <Container className="mt-4 mb-5">
         <Row className="justify-content-md-center mb-3">
-          <Col md='6'>
+          <Col md='6' className="d-flex justify-content-center">
             <Button
               size="lg"
               variant="warning"
               onClick={() => setIsCreateFormModalShowing(true)}
+              className='d-flex align-items-center'
             >
-              Add new article
+              <box-icon name='plus' color='white'></box-icon>
+              <span className="ms-1">Article</span>
             </Button>
           </Col>
         </Row>

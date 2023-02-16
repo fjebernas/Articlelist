@@ -11,7 +11,7 @@ function App() {
     <div className="App min-vh-100 d-flex flex-column justify-content-between">
       <Header />
       <FilterableListAndCreator />
-      <ScrollToTop smooth />
+      <ScrollToTop smooth color='white' style={{background: '#839496'}} />
       <Footer />
     </div>
   );

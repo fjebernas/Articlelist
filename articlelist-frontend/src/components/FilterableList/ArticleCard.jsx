@@ -20,8 +20,13 @@ function ArticleCard(props) {
 
   return (
     <Card bg='light' style={{width: '17rem', height: '14rem'}}>
-      <Card.Header className="text-white fw-bold" style={{background: getHeaderBgColor(props.article.category)}}>
-        {props.article.category}
+      <Card.Header className="text-white fw-bold d-flex align-items-center justify-content-center" style={{background: getHeaderBgColor(props.article.category)}}>
+        {
+          props.article.category === 'Front-end' ? <box-icon name='code-alt' color='white'></box-icon>
+            : props.article.category === 'Back-end' ? <box-icon name='data' type='solid' color='white'></box-icon>
+            : <></>
+        }
+        <span className="ms-1">{props.article.category}</span>
       </Card.Header>
       <Card.Body>
         <Card.Title className="fs-4 text-start">{props.article.context}</Card.Title>
@@ -43,7 +48,9 @@ function ArticleCard(props) {
               </Button>
             </Col>
             <Col xs={4} className='p-0'>
-              <Button variant="danger" size="sm" className="me-2 w-75" onClick={handleShow}>Delete</Button>
+              <Button variant="danger" size="sm" className="me-2 w-75" onClick={handleShow}>
+                Delete
+              </Button>
               <Modal show={show} onHide={handleClose} centered size="sm">
                 <Modal.Header closeButton>
                   <Modal.Title>Delete this article?</Modal.Title>
