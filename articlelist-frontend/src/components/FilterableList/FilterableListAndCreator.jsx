@@ -15,6 +15,8 @@ function FilterableListAndCreator(props) {
   const pageSize = 8;
   const articlesFromTheStartUri = `${baseUrl}/articles?size=${pageSize}`;
 
+  
+
   const [articles, setArticles] = useState([]);
   const [links, setLinks] = useState([]);
 
@@ -115,11 +117,17 @@ function FilterableListAndCreator(props) {
         </Row>
         <Row className="justify-content-md-center">
           <Col md='6'>
-            <SearchBar onChange={() => {}} />
+            <SearchBar
+                onChange={value => {
+                  value.length > 0 ? fetchArticles(`${baseUrl}/articles/search/findByContextContaining?infix=${value}`)
+                                  : fetchArticles(articlesFromTheStartUri);
+                }
+              }
+            />
           </Col>
         </Row>
-        <Row className="justify-content-md-center">
-          <div className="d-flex justify-content-md-start justify-content-center flex-wrap my-5" style={{width: '74rem', rowGap: '1rem', columnGap: '1rem'}}>
+        <Row className="justify-content-md-center" >
+          <div className="d-flex justify-content-md-start justify-content-center flex-wrap my-5" style={{width: '74rem', minHeight: '464px', rowGap: '1rem', columnGap: '1rem'}}>
             {
               articleCards.length > 0 ? articleCards 
                                       : <p className="w-100 text-center text-muted fs-3 fst-italic">No articles</p>

@@ -1,7 +1,7 @@
 function SearchBar(props) {
 
   const handleChange = (e) => {
-    props.handleChange(e.target.value);
+    props.onChange(e.target.value);
   }
 
   return (
@@ -10,12 +10,11 @@ function SearchBar(props) {
         <input
           type="search"
           id="search" 
-          className="form-control form-control-lg rounded-0 rounded-start"
+          className="form-control form-control-lg rounded"
           placeholder="Filter articles by keywords ..."
           onChange={handleChange}
           autoComplete='off'
         />
-        <button className="btn btn-primary">Search</button>
       </div>
     </div>
   );

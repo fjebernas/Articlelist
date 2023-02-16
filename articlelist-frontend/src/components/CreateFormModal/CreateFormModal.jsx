@@ -13,7 +13,7 @@ function CreateFormModal(props) {
   }
 
   const handleCategoryChange = (e) => {
-    props.onCategoryChange(e.target.value);
+    props.onCategoryChange(e.currentTarget.value);
   }
 
   const handleLinkChange = (e) => {
