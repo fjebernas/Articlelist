@@ -5,14 +5,14 @@ function Header(props) {
     <Navbar bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="#home" className="fs-2">
-          <span className="text-white">Article</span>
-          <span className="text-info">list</span>
+          <span style={{color: '#ff9035'}}>Article</span>
+          <span className="text-white">list</span>
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
             <Button 
-              variant="info" 
+              variant="outline-info" 
               size="md"
               as="a"
               href="https://francisbernas.netlify.app"
