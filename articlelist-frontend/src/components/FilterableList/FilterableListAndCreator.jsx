@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import "boxicons";
 import { useEffect, useState } from "react";
@@ -15,8 +16,6 @@ function FilterableListAndCreator(props) {
 
   const pageSize = 8;
   const articlesFromTheStartUri = `${baseUrl}/articles?size=${pageSize}`;
-
-  
 
   const [articles, setArticles] = useState([]);
   const [links, setLinks] = useState([]);
@@ -111,9 +110,8 @@ function FilterableListAndCreator(props) {
               size="lg"
               variant="warning"
               onClick={() => setIsCreateFormModalShowing(true)}
-              className='d-flex align-items-center'
             >
-              <box-icon name='plus' color='white'></box-icon>
+              <FontAwesomeIcon icon='plus' color="white" />
               <span className="ms-1">Article</span>
             </Button>
           </Col>

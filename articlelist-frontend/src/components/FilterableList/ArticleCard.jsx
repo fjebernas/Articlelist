@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Button, Card, Col, Container, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 
@@ -22,8 +23,8 @@ function ArticleCard(props) {
     <Card bg='light' style={{width: '17rem', height: '14rem'}}>
       <Card.Header className="text-white fw-bold d-flex align-items-center justify-content-center" style={{background: getHeaderBgColor(props.article.category)}}>
         {
-          props.article.category === 'Front-end' ? <box-icon name='code-alt' color='white'></box-icon>
-            : props.article.category === 'Back-end' ? <box-icon name='data' type='solid' color='white'></box-icon>
+          props.article.category === 'Front-end' ? <FontAwesomeIcon icon='code' />
+            : props.article.category === 'Back-end' ? <FontAwesomeIcon icon='database' />
             : <></>
         }
         <span className="ms-1">{props.article.category}</span>
@@ -44,12 +45,12 @@ function ArticleCard(props) {
                 rel="noreferrer"
                 className="me-2 w-100"
               >
-                Source
+                <FontAwesomeIcon icon='link' color="white" />
               </Button>
             </Col>
             <Col xs={4} className='p-0'>
               <Button variant="danger" size="sm" className="me-2 w-75" onClick={handleShow}>
-                Delete
+                <FontAwesomeIcon icon='trash-can' />
               </Button>
               <Modal show={show} onHide={handleClose} centered size="sm">
                 <Modal.Header closeButton>

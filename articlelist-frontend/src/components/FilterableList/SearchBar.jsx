@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, InputGroup } from "react-bootstrap";
 
 function SearchBar(props) {
@@ -11,7 +12,7 @@ function SearchBar(props) {
       <div className="input-group mt-1">
         <InputGroup>
           <InputGroup.Text id="search" className="bg-primary">
-            <box-icon name='search-alt' color='white'></box-icon>
+            <FontAwesomeIcon icon='search' color="white" />
           </InputGroup.Text>
           <Form.Control
             id="search"
