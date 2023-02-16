@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import "boxicons";
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Flip, ToastContainer } from "react-toastify";
