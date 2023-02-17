@@ -129,7 +129,7 @@ function FilterableListAndCreator(props) {
             />
           </Col>
         </Row>
-        <Row className="mt-4 mb-4 gy-3" style={{minHeight: '464px'}}>
+        <Row className="mt-4 mb-4 gy-3" style={{minHeight: '480px'}}>
           {
             articleCards.length > 0 ? articleCards 
                                     : <p className="w-100 text-center text-muted fs-3 fst-italic">No articles</p>
