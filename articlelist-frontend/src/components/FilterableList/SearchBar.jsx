@@ -16,7 +16,7 @@ function SearchBar(props) {
           </InputGroup.Text>
           <Form.Control
             id="search"
-            placeholder="Filter articles by keywords ..."
+            placeholder="Type to filter articles by keywords ..."
             onChange={handleChange}
             autoComplete='off'
           />
