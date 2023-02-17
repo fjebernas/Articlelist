@@ -14,7 +14,7 @@ import SearchBar from "./SearchBar";
 function FilterableListAndCreator(props) {
 
   const pageSize = 8;
-  const articlesFromTheStartUri = `${baseUrl}/articles?size=${pageSize}`;
+  const articlesFromTheStartUri = `${baseUrl}/articles/search/findAllByOrderByCreatedAtDesc?size=${pageSize}`;
 
   const [articles, setArticles] = useState([]);
   const [links, setLinks] = useState([]);
@@ -47,11 +47,12 @@ function FilterableListAndCreator(props) {
   }
 
   const articleCards = articles.map(article => (
-    <ArticleCard
-      key={article._links.self.href}
-      article={article}
-      onDelete={handleDelete}
-    />
+    <div className="col-xl-3 col-md-6 col-12" key={article._links.self.href}>
+      <ArticleCard
+        article={article}
+        onDelete={handleDelete}
+      />
+    </div>
   ));
 
   const [isCreateFormModalShowing, setIsCreateFormModalShowing] = useState(false);
@@ -128,17 +129,15 @@ function FilterableListAndCreator(props) {
             />
           </Col>
         </Row>
-        <Row className="justify-content-md-center" >
-          <div className="d-flex justify-content-md-start justify-content-center flex-wrap mt-5 mb-4" style={{width: '74rem', minHeight: '464px', rowGap: '1rem', columnGap: '1rem'}}>
-            {
-              articleCards.length > 0 ? articleCards 
-                                      : <p className="w-100 text-center text-muted fs-3 fst-italic">No articles</p>
-            }
-          </div>
+        <Row className="mt-4 mb-4 gy-3" style={{minHeight: '464px'}}>
+          {
+            articleCards.length > 0 ? articleCards 
+                                    : <p className="w-100 text-center text-muted fs-3 fst-italic">No articles</p>
+          }
         </Row>
         <Row className="justify-content-md-center">
           <Col md='6'>
-            <p className="text-muted text-center fst-italic">Total of {totalArticles} articles</p>
+            <p className="text-muted text-center fst-italic">Total of {totalArticles} article(s)</p>
             <NavLinks links={links} onNavigate={(navUri) => fetchArticles(navUri)} />
           </Col>
         </Row>
